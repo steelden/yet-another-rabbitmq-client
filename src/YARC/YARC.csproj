@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F0968A5F-5D95-4EDE-9630-C1AF0F97DD41}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>YARC</RootNamespace>
+    <AssemblyName>YARC</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EasyNetQ, Version=0.33.0.273, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EasyNetQ.0.33.0.273\lib\net40\EasyNetQ.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=3.1.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=3.3.2.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RabbitMQ.Client.3.3.2\lib\net30\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bus\XBus.cs" />
+    <Compile Include="Bus\BusTimeouts.cs" />
+    <Compile Include="Bus\Handlers\ICommandHandler.cs" />
+    <Compile Include="Bus\IBusTimeouts.cs" />
+    <Compile Include="Utility\Serialization\IDataSerializationStrategy.cs" />
+    <Compile Include="Bus\Handlers\IEventHandler.cs" />
+    <Compile Include="ExtApi\IExtApiConfiguration.cs" />
+    <Compile Include="ExtApi\IExtApiModule.cs" />
+    <Compile Include="Bus\IHandlerRegistry.cs" />
+    <Compile Include="Bus\Handlers\IRpcHandler.cs" />
+    <Compile Include="Utility\Serialization\ITypeSerializationStrategy.cs" />
+    <Compile Include="Bus\EasyConnection.cs" />
+    <Compile Include="Bus\EasyConventions.cs" />
+    <Compile Include="Utility\NLogEasyLogger.cs" />
+    <Compile Include="ExtApi\ExtApiConfiguration.cs" />
+    <Compile Include="ExtApi\ExtApiIntegrationModule.cs" />
+    <Compile Include="ExtApi\ExtApiNames.cs" />
+    <Compile Include="Bus\Extensions\BusConnectionExtensions.cs" />
+    <Compile Include="Bus\Extensions\HandlerRegistryExtensions.cs" />
+    <Compile Include="Utility\Serialization\AttributeTypeSerializationStrategy.cs" />
+    <Compile Include="Bus\BusNames.cs" />
+    <Compile Include="Bus\IBusConnection.cs" />
+    <Compile Include="ExtApi\IExtApiDataGenerator.cs" />
+    <Compile Include="ExtApi\IExtApiDataProvider.cs" />
+    <Compile Include="Bus\IIntegrationModule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Bus\IBusConfiguration.cs" />
+    <Compile Include="Bus\BusConfiguration.cs" />
+    <Compile Include="Utility\Disposable.cs" />
+    <Compile Include="Utility\Serialization\JsonDataSerializationStrategy.cs" />
+    <Compile Include="Bus\HandlerRegistry.cs" />
+    <Compile Include="Utility\Invoker.cs" />
+    <Compile Include="Utility\Json\JsonTypeConverter.cs" />
+    <Compile Include="Utility\Serialization\SimpleTypeSerializationStrategy.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\YARC.Messages\YARC.Messages.csproj">
+      <Project>{88072dbc-91de-481d-bc92-7fdeca6597a7}</Project>
+      <Name>YARC.Messages</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
